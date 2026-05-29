@@ -68,6 +68,24 @@ export function LiveMap() {
 
   const azimuthEnd = getAzimuthEndpoint(telemetry.latitude, telemetry.longitude, telemetry.azimuth);
 
+  if (Platform.OS === 'web') {
+    return (
+      <View className="flex-1 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 items-center justify-center">
+         <View className="w-16 h-16 bg-slate-700 rounded-full mb-4 items-center justify-center">
+            <View className="w-6 h-6 bg-accent rounded-full border-4 border-slate-900 shadow-lg" />
+         </View>
+         <AppCard className="bg-slate-900/80 p-3 mx-6 border-slate-600">
+           <AppText className="text-center font-mono text-sm opacity-80" color="secondary">
+             Live Map is not available on the Web preview.
+           </AppText>
+           <AppText className="text-center font-mono text-xs opacity-60 mt-1" color="secondary">
+             Lat: {telemetry.latitude.toFixed(4)}, Lng: {telemetry.longitude.toFixed(4)}
+           </AppText>
+         </AppCard>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 overflow-hidden rounded-2xl border border-slate-700">
       <MapView
